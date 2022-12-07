@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<button style="display: block;" class="ticket-button">Test button</button>
+
 <div id="test-share-panel" style="display: none;">
     <div id="referral-url-copy-input" tabindex="0" aria-label="העתק" class="test-copy-input"><input
             value="https://test.call/z/123332" readonly="readonly" tabindex="-1">
@@ -13,5 +15,21 @@
         </button>
     </div>
 </div>
+<script>(function () {
+    var _z = 'https://test-link/z/customUUID';
+
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var android = !iOS && /android/i.test(navigator.userAgent);
+    var isMobile = iOS || android;
+    if(navigator.share && isMobile) {
+
+        var shareButton = document.querySelector('.ticket-button');
+
+        shareButton.addEventListener('click', function (e) {
+
+            return navigator.share({ title: '', text: '', url: _z });
+        });
+    }
+})();</script>
 </body>
 </html>
